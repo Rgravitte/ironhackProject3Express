@@ -17,7 +17,7 @@ const cors = require("cors");
 require("./config/passport");
 
 mongoose
-  .connect('mongodb://localhost/project3express', {useNewUrlParser: true})
+  .connect('mongodb://localhost/project3', {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })

@@ -18,7 +18,7 @@ router.get('/items', (req, res, next) => {
 
 
 
-router.get('/Item/details/:id', (req, res, next) => {
+router.get('/item/details/:id', (req, res, next) => {
   
   Item.findById(req.params.id)
     // grab the id from req.params and use it to find the Item in the db
@@ -31,12 +31,13 @@ router.get('/Item/details/:id', (req, res, next) => {
     })
 })
 
-router.post('/Items/add-new', (req, res, next) => {
+router.post('/items/add-new', (req, res, next) => {
   Item.create({
-    name: req.body.theTitle,
-    description: req.body.theDescription,
-    cost: req.body.itemCost,
+    name: req.body.name,
+    description: req.body.description,
+    cost: req.body.cost,
     retailPrice: req.body.retailPrice,
+    userId: req.user._id
   })
     .then((response) => {
       res.json(response);
@@ -47,7 +48,7 @@ router.post('/Items/add-new', (req, res, next) => {
 })
 
 
-router.post('/Items/edit/:id', (req, res, next) => {
+router.post('/items/edit/:id', (req, res, next) => {
   Item.findByIdAndUpdate(req.params.id, {
     name: req.body.theTitle,
     description: req.body.theDescription,
@@ -72,7 +73,7 @@ router.post('/Items/edit/:id', (req, res, next) => {
 })
 
 
-router.post('/Items/delete/:id', (req, res, next) => {
+router.post('/items/delete/:id', (req, res, next) => {
   Item.findByIdAndRemove(req.params.id)
     .then((deletedItem) => {
       if (deletedItem === null) {
